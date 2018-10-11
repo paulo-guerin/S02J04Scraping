@@ -27,10 +27,13 @@ def infos_deputy (website)
         array_of_urls << "http://www2.assemblee-nationale.fr"+link['href']
     end
     
+    deputy_first_names_split = []
     deputy_names_split = []
     deputy_names.each do |names|
-        deputy_names_split << names.split[1..-1].join(" ")
+        deputy_first_names_split << names.split[1]
+        deputy_names_split << names.split[2..-1].join(" ")
     end
+    puts deputy_first_names_split
     puts deputy_names_split
 
     array_of_mails = []
@@ -43,7 +46,7 @@ def infos_deputy (website)
     array_final = []
     compteur = 0
     while compteur<array_of_mails.length
-        hash_temporaire = {"#{deputy_names_split[compteur]}"=> array_of_mails[compteur]}
+        hash_temporaire = {"Nom"=>deputy_names_split[compteur], "Prénom"=>deputy_first_names_split[compteur], "email"=>array_of_mails[compteur]}
         array_final << hash_temporaire
         compteur = compteur + 1
         puts array_final
